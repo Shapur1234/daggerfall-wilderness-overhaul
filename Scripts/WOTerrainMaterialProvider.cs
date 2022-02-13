@@ -1,4 +1,4 @@
-﻿// Project:         Daggerfall Tools For Unity
+// Project:         Daggerfall Tools For Unity
 // Copyright:       Copyright (C) 2009-2020 Daggerfall Workshop
 // Web Site:        http://www.dfworkshop.net
 // License:         MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -29,7 +29,7 @@ namespace DaggerfallWorkshop
         }
 
 
-        private readonly Shader shader = Shader.Find("WildernessOverhaul/TilemapTextureArray");
+        //private readonly Shader shader = Shader.Find("WildernessOverhaul/TilemapTextureArray");
         //private readonly Shader shader = Shader.Find("Daggerfall/TilemapTextureArray");
 
         internal static bool IsSupported
@@ -39,7 +39,7 @@ namespace DaggerfallWorkshop
 
         public sealed override Material CreateMaterial()
         {
-            return new Material(shader);
+            return mod.GetAsset<Material>("WOTilemapTextureArrayMat", true);
         }
 
         public override void PromoteMaterial(DaggerfallTerrain daggerfallTerrain, TerrainMaterialData terrainMaterialData)
@@ -113,7 +113,7 @@ namespace DaggerfallWorkshop
             Texture2DArray textureArrayTerrainTilesMetallicGloss = null; // = GetTerrainMetallicGlossMapTextureArray(archive);
             textureArrayTerrainTiles.filterMode =  FilterMode.Point;
 
-            material = new Material(shader);
+            material = CreateMaterial();
             material.name = string.Format("TEXTURE.{0:000} [TilemapTextureArray]", archive);
 
             material.SetTexture(TileTexArrUniforms.TileTexArr, textureArrayTerrainTiles);
